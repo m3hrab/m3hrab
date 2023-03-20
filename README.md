@@ -1,12 +1,3 @@
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
-<!-- Use Montserrat font for all text -->
-<style>
-    body {
-        font-family: 'Montserrat', sans-serif;
-    }
-</style>
-
 # Hi there, I'm [Mehrab Hossain Ope](https://github.com/m3hrab) 👋
 
 I'm a passionate software developer with experience in game development, and machine learning. I'm always eager to learn new technologies and solve challenging problems. 
