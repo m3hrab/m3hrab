@@ -2,13 +2,13 @@
 
 I'm a passionate software developer with experience in game development, and machine learning. I'm always eager to learn new technologies and solve challenging problems. 
 
-## 🔭 I’m currently working on 
-- Building a full-stack web application using Node.js, React, and MongoDB.
-
+<!-- ## 🔭 I’m currently working on 
+- Building a full-stack web application using Node.js, React, and MongoDB. -->
+<!-- 
 ## 🌱 I’m currently learning 
 - React Native for mobile app development
 - Machine Learning and Artificial Intelligence
-
+ -->
 ## 💻 Skills
 - **Programming Languages:** Python, C#, C,  C++, JavaScript, HTML/CSS 
 - **Frameworks/Libraries:** Django, React, Bootstrap, Tailwind, Tensorflow, OpenCV, pygame, KivyMD, BeautifulSoup.
