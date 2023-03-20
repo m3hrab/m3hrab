@@ -17,18 +17,12 @@ I'm a passionate software developer with experience in game development, and mac
 
 <div>
   <a href="https://github.com/m3hrab">
-    <img height="170" align="center" src="https://github-readme-stats.vercel.app/api?username=m3hrab&show_icons=true&theme=radical" />
-  </a>
-  <a href="https://github.com/m3hrab">
     <img height="170" align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=m3hrab&layout=compact&theme=radical" />
   </a>
+  <a href="https://github.com/m3hrab">
+    <img height="170" align="center" src="https://github-readme-stats.vercel.app/api?username=m3hrab&show_icons=true&theme=radical" />
+  </a>
 </div>
-
-## Recent Activity
-
-<!--START_SECTION:activity-->
-<!--END_SECTION:activity-->
-
 
 ## 📫 How to reach me
 - Email: mehrab.cse16@gmail.com
