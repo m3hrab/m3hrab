@@ -5,3 +5,4 @@
 - 💞️ I’m looking to collaborate on something that enables positive social change using new technology.
 - 📫 How to reach me - mehrab.cse16@gmail.com, [Mehrab Hossain](https://www.linkedin.com/in/mehrabhossain/)
 
+[![roadmap.sh](https://roadmap.sh/card/wide/66cd8011a22274ce5036427c?variant=dark)](https://roadmap.sh)
