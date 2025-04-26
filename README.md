@@ -20,7 +20,7 @@
 
 <div align="center">
 
-# 🚀 About Me
+# About Me
 </div>
 
 ```python
@@ -70,12 +70,11 @@ print(f"Working on: {me.current_focus}")
 print(f"Ask me about: {', '.join(me.languages)}")
 ```
 
-<p align="center">
-  <img src="https://github-readme-quotes.herokuapp.com/quote?theme=tokyonight&animation=default&layout=default&font=default" alt="Quote">
-</p>
+<div align="center">
 
-## 🛠️ My Tech Arsenal
+## My Tech Arsenal
 
+</div>
 <table align="center">
   <tr>
     <td align="center" width="96">
@@ -205,21 +204,10 @@ print(f"Ask me about: {', '.join(me.languages)}")
   <img src="https://img.shields.io/badge/BeautifulSoup-0B0D0E?style=for-the-badge&logo=python&logoColor=white" alt="BeautifulSoup"/>
   <img src="https://img.shields.io/badge/AstraDB-00ADEF?style=for-the-badge&logo=apache-cassandra&logoColor=white" alt="AstraDB"/>
 </div>
-
-## 📊 GitHub Analytics
-
 <div align="center">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=m3hrab&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true&border_radius=15&hide_border=true" alt="GitHub Stats"/>
-  
-  <img height="180em" src="https://github-readme-streak-stats.herokuapp.com/?user=m3hrab&theme=tokyonight&hide_border=true&border_radius=15" alt="GitHub Streak"/>
+
+## Featured Projects
 </div>
-
-<div align="center">
-  <img height="250em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=m3hrab&layout=compact&langs_count=8&theme=tokyonight&hide_border=true&border_radius=15" alt="Top Languages"/>
-</div>
-
-## 🏆 Featured Projects
-
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
 
 <a href="https://github.com/m3hrab/project-1">
@@ -243,44 +231,18 @@ print(f"Ask me about: {', '.join(me.languages)}")
 </a>
 
 </div>
-
-## 🧠 Current Learning Journey
-
 <div align="center">
-  <table>
-    <tr>
-      <td>
-        <img src="https://progress-bar.dev/85/?title=Advanced%20NLP%20Techniques&width=400&color=6A5ACD" alt="Advanced NLP Progress">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <img src="https://progress-bar.dev/70/?title=Microservices%20with%20FastAPI&width=400&color=6A5ACD" alt="Microservices Progress">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <img src="https://progress-bar.dev/60/?title=Godot%204%20Game%20Development&width=400&color=6A5ACD" alt="Godot 4 Progress">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <img src="https://progress-bar.dev/40/?title=Cloud%20Infrastructure%20Optimization&width=400&color=6A5ACD" alt="Cloud Infrastructure Progress">
-      </td>
-    </tr>
-  </table>
+
+## Connect With Me
 </div>
-
-## 📫 Connect With Me
-
 <div align="center">
-  <a href="mailto:your.email@example.com">
+  <a href="mailto:mehrab.cse16@gmail.com">
     <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/>
   </a>
-  <a href="https://twitter.com/your-handle">
-    <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter"/>
+  <a href="https://www.instagram.com/mehrab4gaza/">
+    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/>
   </a>
-  <a href="https://discord.gg/your-discord">
+  <a href="https://discord.gg/_m3hrab">
     <img src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"/>
   </a>
 </div>
@@ -295,10 +257,6 @@ print(f"Ask me about: {', '.join(me.languages)}")
   GDScript    ██░░░░░░░░░░░░░░░░░   10.75%
   HTML/CSS    █░░░░░░░░░░░░░░░░░░    5.93%
   ```
-</div>
-
-<div align="center">
-  <img src="https://github.com/m3hrab/m3hrab/blob/output/github-snake-dark.svg" alt="Snake animation" />
 </div>
 
 ---
