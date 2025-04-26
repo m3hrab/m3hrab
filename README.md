@@ -25,49 +25,61 @@
 
 ```python
 class MehrabHossain:
-
-    def __init__(self):
-        self.role = "Software Developer"
-        self.specialization = "Python & AI"
-        self.background = "Indie Game Development"
-        self.location = "Digital Nomad"
-        self.languages = ["Python", "C#", "C++", "GDScript", "JavaScript"]
-        self.current_focus = "Building AI-powered applications"
-        self.power_level = 9001  # It's over 9000!
-        
-    def say_hi(self):
-        print("Thanks for stopping by! Let's build something amazing together.")
-        
-    def solve_problem(self, problem):
-        if problem == "simple":
-            return "☕ One cup of coffee and done!"
-        elif problem == "complex":
-            return "Challenge accepted!"
-        else:
-            return "No problem is unsolvable, just undiscovered xd"
-            
-    def daily_routine(self):
-        return None
+    """
+    Software Developer | Python, AI/ML, Game Dev Roots
+    Building code and ideas from somewhere on Earth.
+    """
     
-    def tech_philosophy(self):
-        return """
-        def elegant_solution(problem):
-            """Keep it simple, clean, and efficient"""
-            solution = problem.understand().break_down().solve_step_by_step()
-            while not solution.is_optimized():
-                solution = solution.refactor()
-            return solution
-        """
+    def __init__(self) -> None:
+        self.name = "Mehrab Hossain"
+        self.role = "Software Developer"
+        self.focus = ["Python Backend", "AI/ML", "API Design"]
+        self.background = "Indie Game Developer (Unity, Godot, Pygame)"
+        self.interests = ["AI/ML", "Web Development", "Game Development", "Open Source"]
+        self.skills = {
+            "Languages": ["Python", "GDScript", "C#", "C++", "HTML/CSS"],
+            "Web": ["Django", "FastAPI", "Flask", "React"],
+            "Databases": ["PostgreSQL", "MySQL", "MongoDB"],
+            "AI/ML": ["LangChain", "PyTorch", "OpenCV", "Pandas", "NumPy"],
+            "Game Dev": ["Godot", "Unity", "Pygame"],
+            "Tools": ["Docker", "Git", "Railway", "Render", "Vercel"],
+        }
 
-# Initialize me
+    def contact_info(self) -> str:
+        return (
+            "Connect with Mehrab:\n"
+            "- Website : https://mehrab.vercel.app\n"
+            "- LinkedIn: https://linkedin.com/in/mehrabhossain\n"
+            "- GitHub  : https://github.com/m3hrab\n"
+            "- Twitter : https://twitter.com/m3hrab\n"
+            "- Email   : mehrab.cse16@gmail.com\n"
+            "- Discord : https://discord.gg/_m3hrab"
+        )
+    
+    def current_focus(self) -> str:
+        return (
+            "Currently:\n"
+            "- Available for freelance and full-time opportunities.\n"
+            "- Building a Python AI-powered backend.\n"
+            "- Contributing to open-source projects."
+        )
+
+    def display_skills(self) -> None:
+        print("Skills:")
+        for category, items in self.skills.items():
+            print(f"{category}: {', '.join(items)}")
+
+# Initialize
 me = MehrabHossain()
 
-# Let's connect!
-me.say_hi()
+# Contact
+print(me.contact_info())
 
-# Current status
-print(f"Working on: {me.current_focus}")
-print(f"Ask me about: {', '.join(me.languages)}")
+# Current Status
+print(me.current_focus())
+
+# Skills
+me.display_skills()
 ```
 
 <div align="center">
@@ -208,6 +220,7 @@ print(f"Ask me about: {', '.join(me.languages)}")
 
 ## Featured Projects
 </div>
+<div align="center">
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
 
 <a href="https://github.com/m3hrab/project-1">
@@ -230,6 +243,7 @@ print(f"Ask me about: {', '.join(me.languages)}")
   <img width="400" src="https://github-readme-stats.vercel.app/api/pin/?username=m3hrab&repo=project-4&theme=tokyonight&hide_border=true&border_radius=15&bg_color=0D1117" alt="Project 4"/>
 </a>
 
+</div>
 </div>
 <div align="center">
 
