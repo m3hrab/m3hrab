@@ -24,62 +24,58 @@
 </div>
 
 ```python
+"""
+  __  __      _               _       _   _                     _       
+ |  \/  | ___| |__  _ __ __ _| |__   | | | | ___  ___ ___  __ _(_)_ __  
+ | |\/| |/ _ \ '_ \| '__/ _` | '_ \  | |_| |/ _ \/ __/ __|/ _` | | '_ \ 
+ | |  | |  __/ | | | | | (_| | |_) | |  _  | (_) \__ \__ \ (_| | | | | |
+ |_|  |_|\___|_| |_|_|  \__,_|_.__/  |_| |_|\___/|___/___/\__,_|_|_| |_|
+"""
+
 class MehrabHossain:
-    """
-    Software Developer | Python, AI/ML, Game Dev Roots
-    Building code and ideas from somewhere on Earth.
-    """
-    
-    def __init__(self) -> None:
+    def __init__(self):
         self.name = "Mehrab Hossain"
-        self.role = "Software Developer"
-        self.focus = ["Python Backend", "AI/ML", "API Design"]
-        self.background = "Indie Game Developer (Unity, Godot, Pygame)"
-        self.interests = ["AI/ML", "Web Development", "Game Development", "Open Source"]
-        self.skills = {
-            "Languages": ["Python", "GDScript", "C#", "C++", "HTML/CSS"],
-            "Web": ["Django", "FastAPI", "Flask", "React"],
-            "Databases": ["PostgreSQL", "MySQL", "MongoDB"],
-            "AI/ML": ["LangChain", "PyTorch", "OpenCV", "Pandas", "NumPy"],
-            "Game Dev": ["Godot", "Unity", "Pygame"],
-            "Tools": ["Docker", "Git", "Railway", "Render", "Vercel"],
+        self.title = "Software Developer | Python · AI/ML · Game Dev"
+        self.expertise = {
+            "Backend": ["Python", "FastAPI", "Django", "Flask"],
+            "AI/ML": ["PyTorch", "LangChain", "OpenCV", "Pandas"],
+            "Game Dev": ["Godot", "Unity", "Pygame", "C#"],
+            "Infrastructure": ["Docker", "PostgreSQL", "Git", "CI/CD"]
         }
-
-    def contact_info(self) -> str:
-        return (
-            "Connect with Mehrab:\n"
-            "- Website : https://mehrab.vercel.app\n"
-            "- LinkedIn: https://linkedin.com/in/mehrabhossain\n"
-            "- GitHub  : https://github.com/m3hrab\n"
-            "- Twitter : https://twitter.com/m3hrab\n"
-            "- Email   : mehrab.cse16@gmail.com\n"
-            "- Discord : https://discord.gg/_m3hrab"
-        )
     
-    def current_focus(self) -> str:
-        return (
-            "Currently:\n"
-            "- Available for freelance and full-time opportunities.\n"
-            "- Building a Python AI-powered backend.\n"
-            "- Contributing to open-source projects."
-        )
+    def __str__(self):
+        return f"""
+        {self.name}
+        {self.title}
+        {"-"*40}
+        {"Building robust systems with creative solutions".center(40)}
+        """
+    
+    def contact(self):
+        return """
+        [Web]    mehrab.vercel.app
+        [Email]  mehrab.cse16@gmail.com
+        [LinkedIn] linkedin.com/in/mehrabhossain
+        [GitHub] github.com/m3hrab
+        [Twitter] twitter.com/m3hrab
+        """
+    
+    def current(self):
+        return """
+        - Open for new opportunities
+        - Developing AI backend systems
+        - Contributing to open-source projects
+        - Learning: Systems design & optimization
+        """
 
-    def display_skills(self) -> None:
-        print("Skills:")
-        for category, items in self.skills.items():
-            print(f"{category}: {', '.join(items)}")
-
-# Initialize
-me = MehrabHossain()
-
-# Contact
-print(me.contact_info())
-
-# Current Status
-print(me.current_focus())
-
-# Skills
-me.display_skills()
+print(MehrabHossain())
+print("Technical Toolkit:")
+for category, tech in MehrabHossain().expertise.items():
+    print(f"{category + ':':<12} {', '.join(tech)}")
+print("\nCurrently:")
+print(MehrabHossain().current())
+print("\nConnect with me:")
+print(MehrabHossain().contact())
 ```
 
 <div align="center">
