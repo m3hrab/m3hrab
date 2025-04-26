@@ -84,7 +84,7 @@ me.display_skills()
 
 <div align="center">
 
-## My Tech Arsenal
+# My Tech Arsenal
 
 </div>
 <table align="center">
