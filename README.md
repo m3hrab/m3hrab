@@ -1,11 +1,5 @@
 <div align="center">
-  
-# 👨‍💻 Mehrab Hossain
-
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=6A5ACD&center=true&vCenter=true&random=false&width=435&lines=Python+%26+AI+Specialist;Software+Engineer;Former+Indie+Game+Developer;Problem+Solver)](https://git.io/typing-svg)
-
-<img src="https://raw.githubusercontent.com/m3hrab/m3hrab/main/assets/banner.png" alt="Banner Image" width="800">
-
+  <img src="https://raw.githubusercontent.com/m3hrab/m3hrab/main/assets/banner.png" alt="Banner Image" width="800">
 </div>
 
 ---
