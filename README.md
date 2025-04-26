@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/m3hrab/m3hrab/main/assets/banner.png" alt="Banner Image" width="800">
+  <img src="https://raw.githubusercontent.com/m3hrab/m3hrab/main/assets/banner.png" alt="Banner Image">
 </div>
 
 ---
@@ -16,23 +16,58 @@
   
 </div>
 
-## 🚀 About Me
+---
+
+<div align="center">
+
+# 🚀 About Me
+</div>
 
 ```python
 class MehrabHossain:
+
     def __init__(self):
         self.role = "Software Developer"
         self.specialization = "Python & AI"
         self.background = "Indie Game Development"
         self.location = "Digital Nomad"
-        self.languages = ["Python", "C#", "C++", "GDScript", "HTML/CSS"]
+        self.languages = ["Python", "C#", "C++", "GDScript", "JavaScript"]
         self.current_focus = "Building AI-powered applications"
+        self.power_level = 9001  # It's over 9000!
         
     def say_hi(self):
         print("Thanks for stopping by! Let's build something amazing together.")
+        
+    def solve_problem(self, problem):
+        if problem == "simple":
+            return "☕ One cup of coffee and done!"
+        elif problem == "complex":
+            return "Challenge accepted!"
+        else:
+            return "No problem is unsolvable, just undiscovered xd"
+            
+    def daily_routine(self):
+        return None
+    
+    def tech_philosophy(self):
+        return """
+        def elegant_solution(problem):
+            """Keep it simple, clean, and efficient"""
+            solution = problem.understand().break_down().solve_step_by_step()
+            while not solution.is_optimized():
+                solution = solution.refactor()
+            return solution
+        """
 
+# Initialize me
 me = MehrabHossain()
+
+# Let's connect!
 me.say_hi()
+
+# Current status
+print(f"Working on: {me.current_focus}")
+print(f"Ask me about: {', '.join(me.languages)}")
 ```
 
 <p align="center">
