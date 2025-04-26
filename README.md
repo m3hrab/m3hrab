@@ -215,7 +215,7 @@ print(MehrabHossain().contact())
 </div>
 <div align="center">
 
-## Featured Projects
+# Featured Projects
 </div>
 <div align="center">
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
@@ -244,7 +244,7 @@ print(MehrabHossain().contact())
 </div>
 <div align="center">
 
-## Connect With Me
+# Connect With Me
 </div>
 <div align="center">
   <a href="mailto:mehrab.cse16@gmail.com">
