@@ -295,12 +295,12 @@ print(MehrabHossain().contact())
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px;">
 
-<a href="https://github.com/m3hrab/Blood-Bank">
-  <img width="400" src="https://github-readme-stats.vercel.app/api/pin/?username=m3hrab&repo=Blood-Bank&theme=tokyonight&hide_border=true&border_radius=15&bg_color=0D1117" alt="Blood-Bank"/>
+<a href="https://github.com/m3hrab/SuperMario-Sis">
+  <img width="400" src="https://github-readme-stats.vercel.app/api/pin/?username=m3hrab&repo=SuperMario-Sis&theme=tokyonight&hide_border=true&border_radius=15&bg_color=0D1117" alt="SuperMario-Sis"/>
 </a>
 
-<a href="https://github.com/m3hrab/The-Last-Message">
-  <img width="400" src="https://github-readme-stats.vercel.app/api/pin/?username=m3hrab&repo=The-Last-Message&theme=tokyonight&hide_border=true&border_radius=15&bg_color=0D1117" alt="The-Last-Message"/>
+<a href="https://github.com/m3hrab/Connect4AI">
+  <img width="400" src="https://github-readme-stats.vercel.app/api/pin/?username=m3hrab&repo=Connect4AI&theme=tokyonight&hide_border=true&border_radius=15&bg_color=0D1117" alt="Connect-4AI"/>
 </a>
 
 </div>
