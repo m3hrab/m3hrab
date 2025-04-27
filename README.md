@@ -54,7 +54,7 @@ class MehrabHossain:
     
     def contact(self):
         return """
-        [Web]    mehrab.vercel.app
+        [Web]    mehrabhossain.vercel.app
         [Email]  mehrab.cse16@gmail.com
         [LinkedIn] linkedin.com/in/mehrabhossain
         [GitHub] github.com/m3hrab
