@@ -24,59 +24,24 @@
 </div>
 
 ```python
-"""
-  __  __      _               _       _   _                     _       
- |  \/  | ___| |__  _ __ __ _| |__   | | | | ___  ___ ___  __ _(_)_ __  
- | |\/| |/ _ \ '_ \| '__/ _` | '_ \  | |_| |/ _ \/ __/ __|/ _` | | '_ \ 
- | |  | |  __/ | | | | | (_| | |_) | |  _  | (_) \__ \__ \ (_| | | | | |
- |_|  |_|\___|_| |_|_|  \__,_|_.__/  |_| |_|\___/|___/___/\__,_|_|_| |_|
-"""
-
-class MehrabHossain:
-
+class Developer:
     def __init__(self):
         self.name = "Mehrab Hossain"
-        self.title = "Software Developer | Python · AI/ML · Game Dev"
-        self.expertise = {
-            "Backend": ["Python", "FastAPI", "Django", "Flask"],
-            "AI/ML": ["PyTorch", "LangChain", "OpenCV", "Pandas"],
-            "Game Dev": ["Godot", "Unity", "Pygame", "C#"],
-            "Infrastructure": ["Docker", "PostgreSQL", "Git", "CI/CD"]
+        self.role = "Full-Stack Developer"
+        self.focus = "AI/ML | Game Dev | Scalable Systems"
+        self.stack = {
+            "Backend": ["Python", "FastAPI", "Django"],
+            "Frontend": ["React", "Tailwind", "HTMX"],
+            "AI/ML": ["PyTorch", "LangChain", "OpenCV"],
+            "DevOps": ["Docker", "CI/CD", "AWS"]
         }
     
     def __str__(self):
-        return f"""
-        {self.name}
-        {self.title}
-        {"-"*40}
-        {"Building robust systems with creative solutions".center(40)}
-        """
-    
-    def contact(self):
-        return """
-        [Web]    mehrabhossain.vercel.app
-        [Email]  mehrab.cse16@gmail.com
-        [LinkedIn] linkedin.com/in/mehrabhossain
-        [GitHub] github.com/m3hrab
-        [Twitter] twitter.com/m3hrab
-        """
-    
-    def current(self):
-        return """
-        - Open for new opportunities
-        - Developing AI backend systems
-        - Contributing to open-source projects
-        - Learning: Systems design & optimization
-        """
+        return f"{self.name} | {self.role}\nBuilding intelligent systems with clean code"
 
-print(MehrabHossain())
-print("Technical Toolkit:")
-for category, tech in MehrabHossain().expertise.items():
-    print(f"{category + ':':<12} {', '.join(tech)}")
-print("\nCurrently:")
-print(MehrabHossain().current())
-print("\nConnect with me:")
-print(MehrabHossain().contact())
+me = Developer()
+print(me)
+
 ```
 
 <div align="center">
