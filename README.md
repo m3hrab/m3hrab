@@ -46,7 +46,7 @@ Open to backend engineering roles at product-focused, remote-first teams — and
 
 [![GitHub](https://img.shields.io/badge/GitHub-000000?style=flat-square&logo=github&logoColor=white)](https://github.com/m3hrab)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-000000?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mehrabhossain/)
-[![Email](https://img.shields.io/badge/Email-000000?style=flat-square&logo=gmail&logoColor=white)](mehrab.cse16@gmail.com)
+[![Email](https://img.shields.io/badge/Email-000000?style=flat-square&logo=gmail&logoColor=white)](mailto:mehrab.cse16@gmail.com)
 
 <sub>Pinned repositories below — that's where the work speaks for itself.</sub>
 
