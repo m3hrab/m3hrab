@@ -53,22 +53,17 @@
 
 [![GitHub](https://img.shields.io/badge/GitHub-000000?style=flat-square&logo=github&logoColor=white)](https://github.com/m3hrab)
 &nbsp;
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-000000?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mehrabhossain/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-000000?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2ExLjk0NCAxLjk0NCAwIDAgMS0xLjk0OC0xLjk0NSAxLjk0NCAxLjk0NCAwIDAgMSAxLjk0OC0xLjk0NSAxLjk0MyAxLjk0MyAwIDAgMSAxLjk0NyAxLjk0NSAxLjk0NCAxLjk0NCAwIDAgMS0xLjk0NyAxLjk0NXptMS43NzkgMTMuMDE5SDMuNTU4VjloMy41NTh2MTEuNDUyek0yMi4yMjUgMEgxLjc3MUMuNzkyIDAgMCAuNzc0IDAgMS43MjlWMjIuMjdjMCAuOTU1Ljc5MiAxLjczIDEuNzcxIDEuNzNoMjAuNDUxQzIzLjIgMjQgMjQgMjMuMjI3IDI0IDIyLjI3MVYxLjcyOUMyNCAuNzczIDIzLjIgMCAyMi4yMjIgMGguMDAzeiIvPjwvc3ZnPg==)](https://www.linkedin.com/in/mehrabhossain/)
 &nbsp;
 [![Portfolio](https://img.shields.io/badge/Portfolio-000000?style=flat-square&logo=googlechrome&logoColor=white)](https://mehrabhossain.vercel.app/)
 &nbsp;
 [![Email](https://img.shields.io/badge/Email-000000?style=flat-square&logo=gmail&logoColor=white)](mailto:mehrab.cse16@gmail.com)
-
-<br>
-<br>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/m3hrab/m3hrab/output/github-contribution-grid-snake-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/m3hrab/m3hrab/output/github-contribution-grid-snake.svg">
   <img alt="GitHub contribution grid snake animation" src="https://raw.githubusercontent.com/m3hrab/m3hrab/output/github-contribution-grid-snake.svg">
 </picture>
-
-<br>
 
 <sub>Pinned repositories below — that's where the work speaks for itself.</sub>
 
