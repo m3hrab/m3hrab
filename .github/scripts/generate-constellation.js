@@ -217,7 +217,10 @@ async function main() {
     textColor: "#444444",
   });
 
-  const outDir = path.join(__dirname, "dist");
+  // process.cwd() is the repo root when run via `node .github/scripts/...`
+  // from the GitHub Actions checkout — writing there (not __dirname) so the
+  // workflow's build_dir: dist step can find it.
+  const outDir = path.join(process.cwd(), "dist");
   fs.mkdirSync(outDir, { recursive: true });
   fs.writeFileSync(path.join(outDir, "constellation-dark.svg"), darkSvg);
   fs.writeFileSync(path.join(outDir, "constellation.svg"), lightSvg);
