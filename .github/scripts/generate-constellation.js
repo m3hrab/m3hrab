@@ -137,6 +137,11 @@ const MONTH_NAMES = [
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
 ];
 
+// Row index (0=Sun..6=Sat, matching GitHub's contributionDays order) ->
+// short label. Only Mon/Wed/Fri are labeled, GitHub-style, to avoid
+// crowding the left edge.
+const DAY_LABELS = { 1: "Mon", 3: "Wed", 5: "Fri" };
+
 function formatMonthYear(date) {
   return `${MONTH_NAMES[date.getMonth()]} ${date.getFullYear()}`;
 }
@@ -191,11 +196,12 @@ function buildSvg(weeks, theme) {
   const { bg, starDim, lineGlow, textColor, recentColor, oldColor } = theme;
 
   const cellSize = 12;
-  const paddingX = 30;
+  const paddingLeft = 34; // room for Mon/Wed/Fri weekday labels
+  const paddingRight = 20;
   const paddingY = 26;
   const monthLabelHeight = 18;
   const captionHeight = 42; // two lines of caption text now
-  const width = weeks.length * cellSize + paddingX * 2;
+  const width = weeks.length * cellSize + paddingLeft + paddingRight;
   const height =
     monthLabelHeight + 7 * cellSize + paddingY * 2 + captionHeight;
 
@@ -211,21 +217,28 @@ function buildSvg(weeks, theme) {
     });
   });
 
-  const maxCount = Math.max(...allDays.map((d) => d.count), 1);
   const totalDays = allDays.length;
+
+  // Size and opacity are driven purely by the ABSOLUTE commit count for
+  // that day (not scaled relative to this dataset's max), so a 3-commit
+  // day always looks like a 3-commit day regardless of how big someone's
+  // biggest day happened to be. Growth is capped at COMMIT_CAP so size
+  // differences stay meaningful instead of a single outlier day flattening
+  // everything else.
+  const COMMIT_CAP = 20;
 
   function starRadius(count) {
     if (count === 0) return 0.6;
-    // Less compression than sqrt so low-commit days stay visibly small
-    // and high-commit days really stand out.
-    const scale = Math.pow(count / maxCount, 0.75);
-    return 1.0 + scale * 4.2;
+    const capped = Math.min(count, COMMIT_CAP);
+    const scale = Math.pow(capped / COMMIT_CAP, 0.7);
+    return 1.0 + scale * 4.6;
   }
 
   function starOpacity(count) {
     if (count === 0) return 0.15;
-    const scale = Math.sqrt(count / maxCount);
-    return 0.45 + scale * 0.55;
+    const capped = Math.min(count, COMMIT_CAP);
+    const scale = Math.pow(capped / COMMIT_CAP, 0.6);
+    return 0.5 + scale * 0.5;
   }
 
   // Recency-based color spans the FULL year: index 0 (oldest) -> oldColor,
@@ -242,7 +255,7 @@ function buildSvg(weeks, theme) {
     const rnd = seededRandom(day.date);
     const jx = (rnd() - 0.5) * cellSize * 0.85;
     const jy = (rnd() - 0.5) * cellSize * 0.85;
-    const x = paddingX + day.col * cellSize + cellSize / 2 + jx;
+    const x = paddingLeft + day.col * cellSize + cellSize / 2 + jx;
     const y =
       monthLabelHeight + paddingY + day.row * cellSize + cellSize / 2 + jy;
     return { x, y };
@@ -327,7 +340,7 @@ function buildSvg(weeks, theme) {
     if (month !== lastMonth) {
       monthLabels.push({
         label: MONTH_NAMES[month],
-        x: paddingX + wi * cellSize,
+        x: paddingLeft + wi * cellSize,
       });
       lastMonth = month;
     }
@@ -338,6 +351,19 @@ function buildSvg(weeks, theme) {
     monthLabelsSvg += `<text x="${m.x.toFixed(
       2
     )}" y="${monthLabelHeight}" font-family="Fira Code, monospace" font-size="9" fill="${textColor}" opacity="0.5">${m.label}</text>`;
+  });
+
+  // Weekday labels (Mon/Wed/Fri) along the left edge, GitHub-style, so
+  // each row has context instead of the grid feeling purely abstract.
+  let dayLabelsSvg = "";
+  Object.entries(DAY_LABELS).forEach(([row, label]) => {
+    const y =
+      monthLabelHeight + paddingY + Number(row) * cellSize + cellSize / 2 + 3;
+    dayLabelsSvg += `<text x="${(paddingLeft - 8).toFixed(
+      2
+    )}" y="${y.toFixed(
+      2
+    )}" text-anchor="end" font-family="Fira Code, monospace" font-size="9" fill="${textColor}" opacity="0.5">${label}</text>`;
   });
 
   // Curved glow lines: a soft blurred pass underneath, a very thin crisp
@@ -351,10 +377,9 @@ function buildSvg(weeks, theme) {
 
   // Stars: dim/static first (background layer), then bright/animated
   // (foreground layer) so twinkle glows aren't occluded by static dots.
-  // Twinkle threshold applies uniformly across the whole year (not just
-  // recent days) — any day at or above half of the year's max commit
-  // count gets the pulsing glow treatment.
-  const TWINKLE_THRESHOLD = 0.5;
+  // Twinkle is reserved for genuinely big days only: more than 10
+  // commits in a single day, regardless of what the year's max is.
+  const TWINKLE_MIN_COMMITS = 10;
   let dimStarsSvg = "";
   let brightStarsSvg = "";
 
@@ -363,26 +388,41 @@ function buildSvg(weeks, theme) {
     const r = starRadius(d.count);
     const o = starOpacity(d.count);
     const fill = colors.get(d.date);
-    const isBright = d.count > 0 && d.count >= maxCount * TWINKLE_THRESHOLD;
+    const isBright = d.count > TWINKLE_MIN_COMMITS;
 
     const title = `<title>${d.date}: ${d.count} contribution${
       d.count === 1 ? "" : "s"
     }</title>`;
 
     if (isBright) {
-      // Soft glow halo
-      brightStarsSvg += `<circle cx="${pos.x.toFixed(2)}" cy="${pos.y.toFixed(
-        2
-      )}" r="${(r * 2.2).toFixed(2)}" fill="${fill}" opacity="${(
-        o * 0.15
-      ).toFixed(2)}" />`;
-
-      // Twinkling star: unique animation-delay per star via inline style,
-      // staggered so stars don't pulse in unison.
       const delay = (seededRandom(d.date + "-delay")() * 4).toFixed(2);
-      const duration = (2.4 + seededRandom(d.date + "-dur")() * 1.6).toFixed(
+      const duration = (2.6 + seededRandom(d.date + "-dur")() * 1.4).toFixed(
         2
       );
+      const haloDelay = (seededRandom(d.date + "-halo-delay")() * 3).toFixed(
+        2
+      );
+      const haloDuration = (
+        3.2 +
+        seededRandom(d.date + "-halo-dur")() * 1.6
+      ).toFixed(2);
+
+      // Soft glow halo, breathing slowly and independently of the star
+      // itself so the two don't pulse in lockstep — reads as a gentle
+      // aura rather than a blinking dot.
+      brightStarsSvg += `<circle class="tw-halo" style="--ho:${(
+        o * 0.18
+      ).toFixed(
+        2
+      )};animation-delay:${haloDelay}s;animation-duration:${haloDuration}s" cx="${pos.x.toFixed(
+        2
+      )}" cy="${pos.y.toFixed(2)}" r="${(r * 2.4).toFixed(
+        2
+      )}" fill="${fill}" opacity="${(o * 0.18).toFixed(2)}" />`;
+
+      // Twinkling star itself: breathes via a combined opacity + gentle
+      // scale, eased with a cubic-bezier so it feels like a soft pulse
+      // rather than a mechanical fade.
       brightStarsSvg += `<circle class="tw" style="--o:${o.toFixed(
         2
       )};animation-delay:${delay}s;animation-duration:${duration}s" cx="${pos.x.toFixed(
@@ -416,11 +456,32 @@ function buildSvg(weeks, theme) {
     </filter>
   </defs>
   <style>
-    @keyframes tw { 0%, 100% { opacity: var(--o, 1); } 50% { opacity: calc(var(--o, 1) * 0.35); } }
-    .tw { animation-name: tw; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+    @keyframes tw {
+      0%, 100% { opacity: var(--o, 1); transform: scale(1); }
+      50% { opacity: calc(var(--o, 1) * 0.45); transform: scale(1.3); }
+    }
+    @keyframes tw-halo {
+      0%, 100% { opacity: var(--ho, 0.15); transform: scale(1); }
+      50% { opacity: calc(var(--ho, 0.15) * 2.1); transform: scale(1.15); }
+    }
+    .tw {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation-name: tw;
+      animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+      animation-iteration-count: infinite;
+    }
+    .tw-halo {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation-name: tw-halo;
+      animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+      animation-iteration-count: infinite;
+    }
   </style>
   <rect x="0" y="0" width="${width}" height="${height}" fill="${bg}" />
   <g>${monthLabelsSvg}</g>
+  <g>${dayLabelsSvg}</g>
   <g>${glowLinesSvg}</g>
   <g>${crispLinesSvg}</g>
   <g>${dimStarsSvg}</g>
@@ -437,20 +498,20 @@ async function main() {
 
   const darkSvg = buildSvg(weeks, {
     bg: "#0d1117",
-    starDim: "#30363d",
+    starDim: "#262b38", // muted slate-blue, richer than flat gray
     lineGlow: "#8b8b8b",
-    textColor: "#c9d1d9",
-    recentColor: "#ffb454", // warm amber = recent activity
-    oldColor: "#5b8fd6", // cool blue = older activity
+    textColor: "#b9c0cc",
+    recentColor: "#ffcf5c", // warm gold = recent activity
+    oldColor: "#7c6fe0", // royal violet = older activity
   });
 
   const lightSvg = buildSvg(weeks, {
     bg: "#ffffff",
-    starDim: "#e0e0e0",
+    starDim: "#e3e5ea",
     lineGlow: "#555555",
-    textColor: "#444444",
-    recentColor: "#d85a1e", // warm coral-amber, readable on white
-    oldColor: "#2a5ea8", // cool blue, readable on white
+    textColor: "#3f3f46",
+    recentColor: "#c9820a", // deep amber-gold, stays rich on white
+    oldColor: "#463c94", // deep royal indigo, stays rich on white
   });
 
   const outDir = path.join(process.cwd(), "dist");
