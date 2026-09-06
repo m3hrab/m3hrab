@@ -1,15 +1,20 @@
 /**
- * Constellation contribution graph — v2
+ * Constellation contribution graph — v3
  *
- * Design upgrades over v1:
- * - Native SVG/CSS @keyframes: brightest stars gently twinkle (opacity pulse)
- * - Color maps to RECENCY, not just intensity: recent activity glows warm
- *   (amber/coral), older activity cools toward blue/white — so the graph
- *   tells a story (trending up vs quiet lately), not just decoration
- * - Month labels along the bottom, like the native contribution graph,
- *   so the timeline has context instead of feeling abstract
- * - Deterministic jitter (unchanged from v1) keeps layout stable day-to-day
- * - <title> tooltips retain exact date + count per star
+ * Upgrades over v2:
+ * - Recency coloring now spans the FULL year (Jan → Dec / full 365-day
+ *   window), not just the last 90 days — warm (recent) to cool (old)
+ *   across the entire timeline, so the color itself tells a year-long story.
+ * - Size still driven purely by commit count (unchanged) — color and size
+ *   are fully decoupled: size = "how much", color = "how recent".
+ * - Twinkle reserved for truly high-commit days only (raised threshold
+ *   from 0.55 -> 0.8 of maxCount), so only the standout days pulse.
+ * - Streak lines are now soft curved glowing arcs (quadratic bezier +
+ *   blurred glow pass), colored as a blend of the two stars they connect,
+ *   instead of straight thin spreadsheet-style connectors.
+ * - Year/timeframe label rendered top-right.
+ * - Caption now reports longest streak, current streak, and most active
+ *   month, in addition to total contributions.
  *
  * Usage: GITHUB_TOKEN=xxx GITHUB_USER=m3hrab node generate-constellation.js
  * Outputs: dist/constellation.svg, dist/constellation-dark.svg
@@ -112,19 +117,84 @@ function hexToRgb(hex) {
   };
 }
 
+// Parse an "rgb(r,g,b)" string back into components, for blending line colors
+function parseRgbString(s) {
+  const m = s.match(/rgb\((\d+),(\d+),(\d+)\)/);
+  if (!m) return { r: 128, g: 128, b: 128 };
+  return { r: +m[1], g: +m[2], b: +m[3] };
+}
+
+function blendRgbStrings(a, b) {
+  const pa = parseRgbString(a);
+  const pb = parseRgbString(b);
+  return `rgb(${Math.round((pa.r + pb.r) / 2)},${Math.round(
+    (pa.g + pb.g) / 2
+  )},${Math.round((pa.b + pb.b) / 2)})`;
+}
+
 const MONTH_NAMES = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
 ];
 
+function formatMonthYear(date) {
+  return `${MONTH_NAMES[date.getMonth()]} ${date.getFullYear()}`;
+}
+
+// Compute longest streak, current streak (ending on the last day with
+// data), and the most active calendar month across the whole dataset.
+function computeStats(sortedDays) {
+  let longest = 0;
+  let running = 0;
+  let current = 0;
+
+  for (const d of sortedDays) {
+    if (d.count > 0) {
+      running += 1;
+      longest = Math.max(longest, running);
+    } else {
+      running = 0;
+    }
+  }
+
+  // Current streak: walk backwards from the most recent day.
+  for (let i = sortedDays.length - 1; i >= 0; i--) {
+    if (sortedDays[i].count > 0) {
+      current += 1;
+    } else {
+      break;
+    }
+  }
+
+  const monthTotals = new Map(); // "YYYY-M" -> { total, date }
+  for (const d of sortedDays) {
+    const dt = new Date(d.date);
+    const key = `${dt.getFullYear()}-${dt.getMonth()}`;
+    const entry = monthTotals.get(key) || { total: 0, date: dt };
+    entry.total += d.count;
+    monthTotals.set(key, entry);
+  }
+
+  let mostActiveMonth = null;
+  let mostActiveTotal = -1;
+  for (const { total, date } of monthTotals.values()) {
+    if (total > mostActiveTotal) {
+      mostActiveTotal = total;
+      mostActiveMonth = date;
+    }
+  }
+
+  return { longest, current, mostActiveMonth, mostActiveTotal };
+}
+
 function buildSvg(weeks, theme) {
-  const { bg, starDim, line, textColor, recentColor, oldColor, coldest } = theme;
+  const { bg, starDim, lineGlow, textColor, recentColor, oldColor } = theme;
 
   const cellSize = 12;
   const paddingX = 30;
   const paddingY = 26;
   const monthLabelHeight = 18;
-  const captionHeight = 28;
+  const captionHeight = 42; // two lines of caption text now
   const width = weeks.length * cellSize + paddingX * 2;
   const height =
     monthLabelHeight + 7 * cellSize + paddingY * 2 + captionHeight;
@@ -156,16 +226,14 @@ function buildSvg(weeks, theme) {
     return 0.45 + scale * 0.55;
   }
 
-  // Recency-based color: most recent ~90 days trend warm (recentColor),
-  // older days cool toward oldColor. Zero-count days stay dim/neutral
+  // Recency-based color spans the FULL year: index 0 (oldest) -> oldColor,
+  // last index (most recent) -> recentColor. Zero-count days stay dim/neutral
   // regardless of recency (no point coloring empty space).
   function starColor(day, index) {
     if (day.count === 0) return starDim;
-    const recencyWindow = Math.min(90, totalDays);
-    const distanceFromEnd = totalDays - 1 - index;
-    const t = Math.min(1, distanceFromEnd / recencyWindow);
-    // t=0 (most recent) -> recentColor, t=1 (older) -> oldColor
-    return lerpColor(recentColor, oldColor, t);
+    const t = totalDays > 1 ? index / (totalDays - 1) : 1; // 0=oldest, 1=newest
+    // t=1 (most recent) -> recentColor, t=0 (oldest) -> oldColor
+    return lerpColor(oldColor, recentColor, t);
   }
 
   function jitteredPos(day) {
@@ -179,27 +247,60 @@ function buildSvg(weeks, theme) {
   }
 
   const positions = new Map();
-  allDays.forEach((d) => positions.set(d.date, jitteredPos(d)));
+  const colors = new Map();
+  allDays.forEach((d, i) => {
+    positions.set(d.date, jitteredPos(d));
+    colors.set(d.date, starColor(d, i));
+  });
 
-  const lines = [];
-  let prevActive = null;
   const sortedDays = [...allDays].sort((a, b) => (a.date < b.date ? -1 : 1));
+
+  // Build curved, glowing streak connectors between consecutive active days.
+  const curves = [];
+  let prevActive = null;
   for (const d of sortedDays) {
     if (d.count > 0) {
       if (prevActive) {
-        const p1 = positions.get(prevActive.date);
-        const p2 = positions.get(d.date);
         const gapDays =
           (new Date(d.date) - new Date(prevActive.date)) / (1000 * 60 * 60 * 24);
         if (gapDays <= 1) {
-          lines.push({ x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y });
+          const p1 = positions.get(prevActive.date);
+          const p2 = positions.get(d.date);
+          const dx = p2.x - p1.x;
+          const dy = p2.y - p1.y;
+          const len = Math.sqrt(dx * dx + dy * dy) || 1;
+          const perpX = -dy / len;
+          const perpY = dx / len;
+          const rnd = seededRandom(prevActive.date + d.date);
+          const sign = rnd() > 0.5 ? 1 : -1;
+          const bow = sign * (1.5 + rnd() * 2.5); // gentle arc, not a sharp bend
+          const mx = (p1.x + p2.x) / 2 + perpX * bow;
+          const my = (p1.y + p2.y) / 2 + perpY * bow;
+          const strokeColor = blendRgbStrings(
+            colors.get(prevActive.date),
+            colors.get(d.date)
+          );
+          curves.push({
+            d: `M ${p1.x.toFixed(2)} ${p1.y.toFixed(2)} Q ${mx.toFixed(
+              2
+            )} ${my.toFixed(2)} ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`,
+            color: strokeColor,
+          });
         }
       }
       prevActive = d;
     }
   }
 
+  const stats = computeStats(sortedDays);
   const totalContributions = allDays.reduce((s, d) => s + d.count, 0);
+
+  const startDate = new Date(sortedDays[0].date);
+  const endDate = new Date(sortedDays[sortedDays.length - 1].date);
+  const timeframeLabel =
+    startDate.getFullYear() === endDate.getFullYear()
+      ? `${startDate.getFullYear()}`
+      : `${formatMonthYear(startDate)} – ${formatMonthYear(endDate)}`;
 
   // Month labels: mark the first week-column where a new month starts
   const monthLabels = [];
@@ -224,19 +325,29 @@ function buildSvg(weeks, theme) {
     )}" y="${monthLabelHeight}" font-family="Fira Code, monospace" font-size="9" fill="${textColor}" opacity="0.5">${m.label}</text>`;
   });
 
+  const yearLabelSvg = `<text x="${width - paddingX}" y="${monthLabelHeight}" text-anchor="end" font-family="Fira Code, monospace" font-size="9" fill="${textColor}" opacity="0.6">${timeframeLabel}</text>`;
+
+  // Curved glow lines: a wide blurred pass underneath, a crisp thin pass on top.
+  let glowLinesSvg = "";
+  let crispLinesSvg = "";
+  curves.forEach((c) => {
+    glowLinesSvg += `<path d="${c.d}" fill="none" stroke="${c.color}" stroke-width="2.4" opacity="0.35" stroke-linecap="round" filter="url(#streak-glow)" />`;
+    crispLinesSvg += `<path d="${c.d}" fill="none" stroke="${c.color}" stroke-width="0.7" opacity="0.55" stroke-linecap="round" />`;
+  });
+
   // Stars: dim/static first (background layer), then bright/animated
   // (foreground layer) so twinkle glows aren't occluded by static dots.
+  // Twinkle is now reserved for only the truly high-commit days.
+  const TWINKLE_THRESHOLD = 0.8;
   let dimStarsSvg = "";
   let brightStarsSvg = "";
-  let twinkleDefs = "";
-  let twinkleIndex = 0;
 
   allDays.forEach((d, i) => {
     const pos = positions.get(d.date);
     const r = starRadius(d.count);
     const o = starOpacity(d.count);
-    const fill = starColor(d, i);
-    const isBright = d.count > 0 && d.count >= maxCount * 0.55;
+    const fill = colors.get(d.date);
+    const isBright = d.count > 0 && d.count >= maxCount * TWINKLE_THRESHOLD;
 
     const title = `<title>${d.date}: ${d.count} contribution${
       d.count === 1 ? "" : "s"
@@ -246,8 +357,8 @@ function buildSvg(weeks, theme) {
       // Soft glow halo
       brightStarsSvg += `<circle cx="${pos.x.toFixed(2)}" cy="${pos.y.toFixed(
         2
-      )}" r="${(r * 2).toFixed(2)}" fill="${fill}" opacity="${(
-        o * 0.12
+      )}" r="${(r * 2.2).toFixed(2)}" fill="${fill}" opacity="${(
+        o * 0.15
       ).toFixed(2)}" />`;
 
       // Twinkling star: unique animation-delay per star via inline style,
@@ -263,7 +374,6 @@ function buildSvg(weeks, theme) {
       )}" cy="${pos.y.toFixed(2)}" r="${r.toFixed(
         2
       )}" fill="${fill}" opacity="${o.toFixed(2)}">${title}</circle>`;
-      twinkleIndex++;
     } else {
       dimStarsSvg += `<circle cx="${pos.x.toFixed(2)}" cy="${pos.y.toFixed(
         2
@@ -273,26 +383,34 @@ function buildSvg(weeks, theme) {
     }
   });
 
-  let linesSvg = "";
-  lines.forEach((l) => {
-    linesSvg += `<line x1="${l.x1.toFixed(2)}" y1="${l.y1.toFixed(
-      2
-    )}" x2="${l.x2.toFixed(2)}" y2="${l.y2.toFixed(2)}" stroke="${line}" stroke-width="0.6" opacity="0.35" />`;
-  });
-
-  const caption = `${totalContributions.toLocaleString()} contributions mapped as stars`;
+  const captionLine1 = `${totalContributions.toLocaleString()} contributions mapped as stars`;
+  const mostActiveLabel = stats.mostActiveMonth
+    ? formatMonthYear(stats.mostActiveMonth)
+    : "—";
+  const captionLine2 = `Longest streak ${stats.longest}d  ·  Current streak ${stats.current}d  ·  Busiest month ${mostActiveLabel}`;
 
   return `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="streak-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
   <style>
     @keyframes tw { 0%, 100% { opacity: var(--o, 1); } 50% { opacity: calc(var(--o, 1) * 0.35); } }
     .tw { animation-name: tw; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
   </style>
   <rect x="0" y="0" width="${width}" height="${height}" fill="${bg}" />
-  <g>${monthLabelsSvg}</g>
-  <g>${linesSvg}</g>
+  <g>${monthLabelsSvg}${yearLabelSvg}</g>
+  <g>${glowLinesSvg}</g>
+  <g>${crispLinesSvg}</g>
   <g>${dimStarsSvg}</g>
   <g>${brightStarsSvg}</g>
-  <text x="${width / 2}" y="${height - 10}" text-anchor="middle" font-family="Fira Code, monospace" font-size="10" fill="${textColor}" opacity="0.6">${caption}</text>
+  <text x="${width / 2}" y="${height - 26}" text-anchor="middle" font-family="Fira Code, monospace" font-size="10" fill="${textColor}" opacity="0.65">${captionLine1}</text>
+  <text x="${width / 2}" y="${height - 10}" text-anchor="middle" font-family="Fira Code, monospace" font-size="9" fill="${textColor}" opacity="0.5">${captionLine2}</text>
 </svg>`;
 }
 
@@ -304,7 +422,7 @@ async function main() {
   const darkSvg = buildSvg(weeks, {
     bg: "#0d1117",
     starDim: "#30363d",
-    line: "#8b8b8b",
+    lineGlow: "#8b8b8b",
     textColor: "#c9d1d9",
     recentColor: "#ffb454", // warm amber = recent activity
     oldColor: "#5b8fd6", // cool blue = older activity
@@ -313,7 +431,7 @@ async function main() {
   const lightSvg = buildSvg(weeks, {
     bg: "#ffffff",
     starDim: "#e0e0e0",
-    line: "#555555",
+    lineGlow: "#555555",
     textColor: "#444444",
     recentColor: "#d85a1e", // warm coral-amber, readable on white
     oldColor: "#2a5ea8", // cool blue, readable on white
