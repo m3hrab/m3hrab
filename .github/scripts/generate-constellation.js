@@ -216,8 +216,10 @@ function buildSvg(weeks, theme) {
 
   function starRadius(count) {
     if (count === 0) return 0.6;
-    const scale = Math.sqrt(count / maxCount);
-    return 1.2 + scale * 2.8;
+    // Less compression than sqrt so low-commit days stay visibly small
+    // and high-commit days really stand out.
+    const scale = Math.pow(count / maxCount, 0.75);
+    return 1.0 + scale * 4.2;
   }
 
   function starOpacity(count) {
@@ -255,52 +257,65 @@ function buildSvg(weeks, theme) {
 
   const sortedDays = [...allDays].sort((a, b) => (a.date < b.date ? -1 : 1));
 
-  // Build curved, glowing streak connectors between consecutive active days.
-  const curves = [];
-  let prevActive = null;
-  for (const d of sortedDays) {
+  // Group consecutive active days (gap <= 1 day) into streaks, then draw
+  // each streak as ONE continuous Catmull-Rom spline through all its
+  // points. This keeps the tangent continuous across every join, so the
+  // line reads as a single smooth thread rather than a chain of
+  // independently-bowed segments.
+  const streaks = [];
+  let current = [];
+  for (let i = 0; i < sortedDays.length; i++) {
+    const d = sortedDays[i];
     if (d.count > 0) {
-      if (prevActive) {
+      if (current.length > 0) {
+        const prev = current[current.length - 1];
         const gapDays =
-          (new Date(d.date) - new Date(prevActive.date)) / (1000 * 60 * 60 * 24);
-        if (gapDays <= 1) {
-          const p1 = positions.get(prevActive.date);
-          const p2 = positions.get(d.date);
-          const dx = p2.x - p1.x;
-          const dy = p2.y - p1.y;
-          const len = Math.sqrt(dx * dx + dy * dy) || 1;
-          const perpX = -dy / len;
-          const perpY = dx / len;
-          const rnd = seededRandom(prevActive.date + d.date);
-          const sign = rnd() > 0.5 ? 1 : -1;
-          const bow = sign * (1.5 + rnd() * 2.5); // gentle arc, not a sharp bend
-          const mx = (p1.x + p2.x) / 2 + perpX * bow;
-          const my = (p1.y + p2.y) / 2 + perpY * bow;
-          const strokeColor = blendRgbStrings(
-            colors.get(prevActive.date),
-            colors.get(d.date)
-          );
-          curves.push({
-            d: `M ${p1.x.toFixed(2)} ${p1.y.toFixed(2)} Q ${mx.toFixed(
-              2
-            )} ${my.toFixed(2)} ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`,
-            color: strokeColor,
-          });
+          (new Date(d.date) - new Date(prev.date)) / (1000 * 60 * 60 * 24);
+        if (gapDays > 1) {
+          if (current.length > 1) streaks.push(current);
+          current = [];
         }
       }
-      prevActive = d;
+      current.push(d);
+    } else {
+      if (current.length > 1) streaks.push(current);
+      current = [];
     }
   }
+  if (current.length > 1) streaks.push(current);
+
+  // Build one smooth curve segment (as its own colored <path>) between
+  // each pair of points in a streak, using Catmull-Rom-derived control
+  // points so tangents line up across the whole streak.
+  const curves = [];
+  streaks.forEach((streak) => {
+    const pts = streak.map((d) => positions.get(d.date));
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[i - 1] || pts[i];
+      const p1 = pts[i];
+      const p2 = pts[i + 1];
+      const p3 = pts[i + 2] || p2;
+      const cp1x = p1.x + (p2.x - p0.x) / 6;
+      const cp1y = p1.y + (p2.y - p0.y) / 6;
+      const cp2x = p2.x - (p3.x - p1.x) / 6;
+      const cp2y = p2.y - (p3.y - p1.y) / 6;
+      const strokeColor = blendRgbStrings(
+        colors.get(streak[i].date),
+        colors.get(streak[i + 1].date)
+      );
+      curves.push({
+        d: `M ${p1.x.toFixed(2)} ${p1.y.toFixed(2)} C ${cp1x.toFixed(
+          2
+        )} ${cp1y.toFixed(2)}, ${cp2x.toFixed(2)} ${cp2y.toFixed(
+          2
+        )}, ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`,
+        color: strokeColor,
+      });
+    }
+  });
 
   const stats = computeStats(sortedDays);
   const totalContributions = allDays.reduce((s, d) => s + d.count, 0);
-
-  const startDate = new Date(sortedDays[0].date);
-  const endDate = new Date(sortedDays[sortedDays.length - 1].date);
-  const timeframeLabel =
-    startDate.getFullYear() === endDate.getFullYear()
-      ? `${startDate.getFullYear()}`
-      : `${formatMonthYear(startDate)} – ${formatMonthYear(endDate)}`;
 
   // Month labels: mark the first week-column where a new month starts
   const monthLabels = [];
@@ -325,20 +340,21 @@ function buildSvg(weeks, theme) {
     )}" y="${monthLabelHeight}" font-family="Fira Code, monospace" font-size="9" fill="${textColor}" opacity="0.5">${m.label}</text>`;
   });
 
-  const yearLabelSvg = `<text x="${width - paddingX}" y="${monthLabelHeight}" text-anchor="end" font-family="Fira Code, monospace" font-size="9" fill="${textColor}" opacity="0.6">${timeframeLabel}</text>`;
-
-  // Curved glow lines: a wide blurred pass underneath, a crisp thin pass on top.
+  // Curved glow lines: a soft blurred pass underneath, a very thin crisp
+  // pass on top — thin enough to read as a constellation thread, not a bar.
   let glowLinesSvg = "";
   let crispLinesSvg = "";
   curves.forEach((c) => {
-    glowLinesSvg += `<path d="${c.d}" fill="none" stroke="${c.color}" stroke-width="2.4" opacity="0.35" stroke-linecap="round" filter="url(#streak-glow)" />`;
-    crispLinesSvg += `<path d="${c.d}" fill="none" stroke="${c.color}" stroke-width="0.7" opacity="0.55" stroke-linecap="round" />`;
+    glowLinesSvg += `<path d="${c.d}" fill="none" stroke="${c.color}" stroke-width="1.6" opacity="0.28" stroke-linecap="round" filter="url(#streak-glow)" />`;
+    crispLinesSvg += `<path d="${c.d}" fill="none" stroke="${c.color}" stroke-width="0.4" opacity="0.6" stroke-linecap="round" />`;
   });
 
   // Stars: dim/static first (background layer), then bright/animated
   // (foreground layer) so twinkle glows aren't occluded by static dots.
-  // Twinkle is now reserved for only the truly high-commit days.
-  const TWINKLE_THRESHOLD = 0.8;
+  // Twinkle threshold applies uniformly across the whole year (not just
+  // recent days) — any day at or above half of the year's max commit
+  // count gets the pulsing glow treatment.
+  const TWINKLE_THRESHOLD = 0.5;
   let dimStarsSvg = "";
   let brightStarsSvg = "";
 
@@ -404,7 +420,7 @@ function buildSvg(weeks, theme) {
     .tw { animation-name: tw; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
   </style>
   <rect x="0" y="0" width="${width}" height="${height}" fill="${bg}" />
-  <g>${monthLabelsSvg}${yearLabelSvg}</g>
+  <g>${monthLabelsSvg}</g>
   <g>${glowLinesSvg}</g>
   <g>${crispLinesSvg}</g>
   <g>${dimStarsSvg}</g>
