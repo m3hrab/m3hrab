@@ -1,82 +1,51 @@
 <div align="center">
 
-# Mehrab Hossain
+<img src="assets/hero.svg" width="100%" alt="Mehrab Hossain, software engineer: backend systems, agentic engineering, product engineering, AI integration" />
+
+<br/>
+
+<a href="https://mehrabhossain.vercel.app/"><img src="https://img.shields.io/badge/PORTFOLIO-91B5AC?style=for-the-badge&logo=vercel&logoColor=090E13&labelColor=91B5AC" /></a>
+<a href="https://www.linkedin.com/in/mehrabhossain/"><img src="https://img.shields.io/badge/LINKEDIN-111820?style=for-the-badge&logo=linkedin&logoColor=E6EDF3" /></a>
+<a href="mailto:mehrab.cse16@gmail.com"><img src="https://img.shields.io/badge/EMAIL-111820?style=for-the-badge&logo=gmail&logoColor=E6EDF3" /></a>
+
+<br/><br/>
+
+<img src="assets/terminal.svg" width="100%" alt="Terminal: Mehrab Hossain, software engineer, Python backend, open to remote roles" />
+
+<br/><br/>
+
+<img src="assets/capabilities.svg" width="100%" alt="What I build: backend systems, product engineering, cloud and infrastructure, AI and agentic engineering" />
+
+<br/><br/>
+
+<img src="assets/stack.svg" width="100%" alt="Stack: Python, Django, FastAPI, Flask, PostgreSQL, Redis, Docker, AWS, TypeScript, React, Claude Code, Cursor, Codex, MCP" />
+
+<br/><br/>
+
+<img src="assets/principles.svg" width="100%" alt="Principles: real problems, reliability, simplicity, AI as a multiplier, useful things" />
+
+<br/><br/>
+
+<img src="assets/activity.svg" width="100%" alt="A year of work, mapped as stars" />
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com/?font=Fira+Code&weight=500&size=15&pause=1200&color=FFFFFF&background=00000000&center=true&vCenter=true&width=500&lines=Backend+Software+Engineer;Python+%C2%B7+Django+%C2%B7+FastAPI;Building+systems+that+scale+cleanly">
-  <source media="(prefers-color-scheme: light)" srcset="https://readme-typing-svg.demolab.com/?font=Fira+Code&weight=500&size=15&pause=1200&color=111111&background=00000000&center=true&vCenter=true&width=500&lines=Backend+Software+Engineer;Python+%C2%B7+Django+%C2%B7+FastAPI;Building+systems+that+scale+cleanly">
-  <img alt="Typing SVG" src="https://readme-typing-svg.demolab.com/?font=Fira+Code&weight=500&size=15&pause=1200&color=111111&background=00000000&center=true&vCenter=true&width=500&lines=Backend+Software+Engineer;Python+%C2%B7+Django+%C2%B7+FastAPI;Building+systems+that+scale+cleanly">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/m3hrab/m3hrab/output/constellation-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/m3hrab/m3hrab/output/constellation.svg" />
+  <img src="https://raw.githubusercontent.com/m3hrab/m3hrab/output/constellation-dark.svg" width="100%" alt="GitHub contribution constellation" />
 </picture>
 
-<sub>Build things that are useful — for people, communities, and the world we share.</sub>
+<img width="49%" src="https://github-readme-stats.vercel.app/api?username=m3hrab&show_icons=true&hide_border=true&bg_color=0D1117&title_color=91B5AC&text_color=9BA9B7&icon_color=91B5AC&include_all_commits=true" alt="GitHub statistics" />
+<img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=m3hrab&layout=compact&hide_border=true&bg_color=0D1117&title_color=91B5AC&text_color=9BA9B7&langs_count=6" alt="Top languages" />
 
-</div>
+<br/><br/>
 
-<br>
+<img src="assets/contact.svg" width="100%" alt="Let’s build something worth keeping. Open to remote backend roles." />
 
-<div align="center">
+<br/>
 
-![Python](https://img.shields.io/badge/Python-000000?style=flat-square&logo=python&logoColor=white)
-![Django](https://img.shields.io/badge/Django-000000?style=flat-square&logo=django&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-000000?style=flat-square&logo=fastapi&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-000000?style=flat-square&logo=postgresql&logoColor=white)
-![Redis](https://img.shields.io/badge/Redis-000000?style=flat-square&logo=redis&logoColor=white)
-![Celery](https://img.shields.io/badge/Celery-000000?style=flat-square&logo=celery&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-000000?style=flat-square&logo=docker&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-000000?style=flat-square&logo=amazonaws&logoColor=white)
-![React](https://img.shields.io/badge/React-000000?style=flat-square&logo=react&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-000000?style=flat-square&logo=typescript&logoColor=white)
-
-</div>
-
-<br>
-
-### What I build
-
-- **Backend systems** — APIs and services built to hold up under real usage, not just pass a demo
-- **SaaS products** — end to end, from data model to deployment
-- **Open source** — growing [MuslimOSS](https://github.com/muslimoss), a community-governed organization for technology that serves humanity
-
-<br>
-
-### Currently
-
-- 🔍 &nbsp;Open to backend engineering roles at product-focused, remote-first teams
-- 🌱 &nbsp;Building [MuslimOSS](https://github.com/muslimoss) — open source with intention
-- ✍🏽 &nbsp;Always reading, always shipping
-
-<br>
-
----
-
-<div align="center">
-
-### A year of work, mapped as stars
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/m3hrab/m3hrab/output/constellation-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/m3hrab/m3hrab/output/constellation.svg">
-  <img alt="A constellation map of GitHub contributions, where each star is a day and brighter stars mean more commits" src="https://raw.githubusercontent.com/m3hrab/m3hrab/output/constellation-dark.svg">
-</picture>
-
-<sub>Every star is a day of work. Brightness is intensity, lines are streaks.</sub>
-
-</div>
-
-<br>
-
----
-
-<div align="center">
-
-[![GitHub](https://img.shields.io/badge/GitHub-000000?style=flat-square&logo=github&logoColor=white)](https://github.com/m3hrab)
-&nbsp;
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-000000?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2ExLjk0NCAxLjk0NCAwIDAgMS0xLjk0OC0xLjk0NSAxLjk0NCAxLjk0NCAwIDAgMSAxLjk0OC0xLjk0NSAxLjk0MyAxLjk0MyAwIDAgMSAxLjk0NyAxLjk0NSAxLjk0NCAxLjk0NCAwIDAgMS0xLjk0NyAxLjk0NXptMS43NzkgMTMuMDE5SDMuNTU4VjloMy41NTh2MTEuNDUyek0yMi4yMjUgMEgxLjc3MUMuNzkyIDAgMCAuNzc0IDAgMS43MjlWMjIuMjdjMCAuOTU1Ljc5MiAxLjczIDEuNzcxIDEuNzNoMjAuNDUxQzIzLjIgMjQgMjQgMjMuMjI3IDI0IDIyLjI3MVYxLjcyOUMyNCAuNzczIDIzLjIgMCAyMi4yMjIgMGguMDAzeiIvPjwvc3ZnPg==)](https://www.linkedin.com/in/mehrabhossain/)
-&nbsp;
-[![Portfolio](https://img.shields.io/badge/Portfolio-000000?style=flat-square&logo=googlechrome&logoColor=white)](https://mehrabhossain.vercel.app/)
-&nbsp;
-[![Email](https://img.shields.io/badge/Email-000000?style=flat-square&logo=gmail&logoColor=white)](mailto:mehrab.cse16@gmail.com)
-
-<sub>Pinned repositories below — that's where the work speaks for itself.</sub>
+<a href="mailto:mehrab.cse16@gmail.com"><img src="https://img.shields.io/badge/GET_IN_TOUCH-91B5AC?style=for-the-badge&logo=gmail&logoColor=090E13&labelColor=91B5AC" /></a>
+<a href="https://github.com/m3hrab"><img src="https://img.shields.io/badge/GITHUB-111820?style=for-the-badge&logo=github&logoColor=E6EDF3" /></a>
+<a href="https://www.linkedin.com/in/mehrabhossain/"><img src="https://img.shields.io/badge/LINKEDIN-111820?style=for-the-badge&logo=linkedin&logoColor=E6EDF3" /></a>
+<a href="https://mehrabhossain.vercel.app/"><img src="https://img.shields.io/badge/PORTFOLIO-111820?style=for-the-badge&logo=vercel&logoColor=E6EDF3" /></a>
 
 </div>
