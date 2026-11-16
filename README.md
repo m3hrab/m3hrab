@@ -22,7 +22,7 @@
 
 <br/><br/>
 
-<img src="assets/principles.svg" width="100%" alt="Principles: real problems, reliability, simplicity, AI as a multiplier, useful things" />
+<img src="assets/direction.svg" width="100%" alt="Principles: real problems, reliability, simplicity, AI as a multiplier, useful things" />
 
 <br/><br/>
 
