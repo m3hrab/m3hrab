@@ -1,14 +1,14 @@
 <div align="center">
 
-<img width="100%" alt="" src="https://capsule-render.vercel.app/api?type=waving&height=110&color=0:0D1117,50:161B22,100:0D1117&section=header" />
+<img width="100%" alt="" src="https://capsule-render.vercel.app/api?type=waving&height=120&color=0:0D1117,50:161B22,100:0D1117&section=header" />
 
 <br/>
 
 # Mehrab Hossain
 
-### Agents write code now. I build the systems they run on.
+<sub><b>AI ENGINEER</b> &nbsp;·&nbsp; <b>PYTHON</b> &nbsp;·&nbsp; <b>AGENTIC SYSTEMS</b> &nbsp;·&nbsp; <b>MCP</b></sub>
 
-**AI Engineer · Python · Agentic Systems · MCP**
+<i>Agents write code now. I build the systems they run on.</i>
 
 <sub>REMOTE &nbsp;·&nbsp; GMT+6</sub>
 
@@ -19,9 +19,13 @@
 <a href="https://mehrabhossain.vercel.app/resume"><img alt="Resume" src="https://img.shields.io/badge/RESUME-21262D?style=for-the-badge" /></a>
 <a href="https://www.linkedin.com/in/mehrabhossain/"><img alt="LinkedIn" src="https://img.shields.io/badge/LINKEDIN-21262D?style=for-the-badge&logo=linkedin&logoColor=8B949E" /></a>
 
-<br/>
+</div>
 
-## What I bring
+---
+
+<div align="center">
+
+## The Work
 
 <table width="100%">
 <tr>
@@ -29,46 +33,54 @@
 <br/>
 <sub>01 &nbsp;·&nbsp; PRODUCTION BACKENDS</sub><br/><br/>
 <b>APIs that stay up</b><br/><br/>
-Python services built for real traffic: clean architecture, async processing, PostgreSQL and Redis, deployed with Docker on AWS.<br/><br/>
-<code>FastAPI</code> <code>Django</code> <code>Async</code> <code>PostgreSQL</code><br/>
+<sub>Python services built for real traffic. Clean architecture, async processing, PostgreSQL and Redis, deployed with Docker on AWS.</sub><br/><br/>
+<code>FastAPI</code> <code>Django</code> <code>PostgreSQL</code><br/>
 <br/>
 </td>
 <td width="33%" valign="top" align="center">
 <br/>
 <sub>02 &nbsp;·&nbsp; AGENT SYSTEMS</sub><br/><br/>
 <b>Agents with guardrails</b><br/><br/>
-MCP servers, tool layers and context design that give agents what they need, and nothing they shouldn't touch.<br/><br/>
-<code>MCP</code> <code>Tool calling</code> <code>Context</code> <code>Memory</code><br/>
+<sub>MCP servers, tool layers and context design that give agents what they need, and nothing they shouldn't touch.</sub><br/><br/>
+<code>MCP</code> <code>Tool calling</code> <code>Context</code><br/>
 <br/>
 </td>
 <td width="33%" valign="top" align="center">
 <br/>
 <sub>03 &nbsp;·&nbsp; AI-NATIVE WORKFLOW</sub><br/><br/>
 <b>Fast, and still accountable</b><br/><br/>
-I work with Claude Code, Cursor and Codex. Agents write the first draft; I own the spec, the tests and the review.<br/><br/>
-<code>Specs</code> <code>Evals</code> <code>Review</code> <code>CI</code><br/>
+<sub>Claude Code, Cursor and Codex write the first draft. I own the spec, the tests and the review.</sub><br/><br/>
+<code>Specs</code> <code>Evals</code> <code>Review</code><br/>
 <br/>
 </td>
 </tr>
 </table>
 
-<br/>
+</div>
 
-## How I ship
+---
+
+<div align="center">
+
+## How I Ship
 
 <table width="100%">
 <tr>
-<td width="20%" valign="top" align="center"><br/><sub>01</sub><br/><b>Spec</b><br/><br/>Intent, constraints and tests come first.<br/><br/></td>
-<td width="20%" valign="top" align="center"><br/><sub>02</sub><br/><b>Build</b><br/><br/>Coding agents write. I direct.<br/><br/></td>
-<td width="20%" valign="top" align="center"><br/><sub>03</sub><br/><b>Evaluate</b><br/><br/>Evals and tests check real behavior.<br/><br/></td>
-<td width="20%" valign="top" align="center"><br/><sub>04</sub><br/><b>Review</b><br/><br/>Every change gets a human review.<br/><br/></td>
-<td width="20%" valign="top" align="center"><br/><sub>05</sub><br/><b>Ship</b><br/><br/>Deploy, observe, improve.<br/><br/></td>
+<td width="20%" valign="top" align="center"><br/><sub>01</sub><br/><br/><b>Spec</b><br/><br/><sub>Intent and tests come first.</sub><br/><br/></td>
+<td width="20%" valign="top" align="center"><br/><sub>02</sub><br/><br/><b>Build</b><br/><br/><sub>Agents write. I direct.</sub><br/><br/></td>
+<td width="20%" valign="top" align="center"><br/><sub>03</sub><br/><br/><b>Evaluate</b><br/><br/><sub>Evals check real behavior.</sub><br/><br/></td>
+<td width="20%" valign="top" align="center"><br/><sub>04</sub><br/><br/><b>Review</b><br/><br/><sub>Every change gets a human review.</sub><br/><br/></td>
+<td width="20%" valign="top" align="center"><br/><sub>05</sub><br/><br/><b>Ship</b><br/><br/><sub>Deploy, observe, improve.</sub><br/><br/></td>
 </tr>
 </table>
 
-<br/>
+</div>
 
-## Selected work
+---
+
+<div align="center">
+
+## Selected Work
 
 <table width="100%">
 <tr>
@@ -76,7 +88,7 @@ I work with Claude Code, Cursor and Codex. Agents write the first draft; I own t
 <br/>
 <sub>LLM APP</sub><br/><br/>
 <a href="#"><b>Real-Time Language Translation</b></a><br/><br/>
-A Django web app that uses LangChain to translate text between languages in real time.<br/><br/>
+<sub>Django + LangChain app that translates text between languages in real time.</sub><br/><br/>
 <code>Django</code> <code>LangChain</code> <code>Python</code><br/><br/>
 <a href="#"><sub><b>CASE STUDY →</b></sub></a><br/>
 <br/>
@@ -85,7 +97,7 @@ A Django web app that uses LangChain to translate text between languages in real
 <br/>
 <sub>CONVERSATIONAL AI</sub><br/><br/>
 <a href="#"><b>Context-Aware AI Chatbot</b></a><br/><br/>
-A chatbot that understands the context of a conversation, built with Python and TensorFlow.<br/><br/>
+<sub>A chatbot that understands conversational context, built with Python and TensorFlow.</sub><br/><br/>
 <code>Python</code> <code>TensorFlow</code><br/><br/>
 <a href="#"><sub><b>CASE STUDY →</b></sub></a><br/>
 <br/>
@@ -96,7 +108,7 @@ A chatbot that understands the context of a conversation, built with Python and 
 <br/>
 <sub>COMPUTER VISION</sub><br/><br/>
 <a href="#"><b>Image Recognition Tool</b></a><br/><br/>
-A deep learning system that recognizes what is in an image.<br/><br/>
+<sub>A deep learning system that recognizes what is in an image.</sub><br/><br/>
 <code>Python</code> <code>Deep learning</code><br/><br/>
 <a href="#"><sub><b>CASE STUDY →</b></sub></a><br/>
 <br/>
@@ -105,7 +117,7 @@ A deep learning system that recognizes what is in an image.<br/><br/>
 <br/>
 <sub>NLP</sub><br/><br/>
 <a href="#"><b>Text Analysis System</b></a><br/><br/>
-A system for processing and understanding human language.<br/><br/>
+<sub>A system for processing and understanding human language.</sub><br/><br/>
 <code>Python</code> <code>NLP</code><br/><br/>
 <a href="#"><sub><b>CASE STUDY →</b></sub></a><br/>
 <br/>
@@ -113,7 +125,11 @@ A system for processing and understanding human language.<br/><br/>
 </tr>
 </table>
 
-<br/>
+</div>
+
+---
+
+<div align="center">
 
 ## Toolbox
 
@@ -167,13 +183,21 @@ A system for processing and understanding human language.<br/><br/>
 </tr>
 </table>
 
-<br/>
+</div>
+
+---
+
+<div align="center">
 
 ## Building with AI agents? Let's compare notes.
+
+<br/>
 
 <a href="https://calendly.com/hello_mehrab/30min"><img alt="Book a 30-minute call" src="https://img.shields.io/badge/BOOK_A_30--MIN_CALL-8B949E?style=for-the-badge&logo=googlecalendar&logoColor=0D1117&labelColor=8B949E" /></a>
 <a href="mailto:mehrab.cse16@gmail.com"><img alt="Send an email" src="https://img.shields.io/badge/SEND_EMAIL-21262D?style=for-the-badge&logo=gmail&logoColor=8B949E" /></a>
 
-</div>
+<br/><br/>
 
-<img width="100%" alt="" src="https://capsule-render.vercel.app/api?type=waving&height=90&color=0:0D1117,50:161B22,100:0D1117&section=footer" />
+<img width="100%" alt="" src="https://capsule-render.vercel.app/api?type=waving&height=80&color=0:0D1117,50:161B22,100:0D1117&section=footer" />
+
+</div>
