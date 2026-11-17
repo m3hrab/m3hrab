@@ -25,7 +25,7 @@
 
 <div align="center">
 
-## The Work
+## What I Actually Do
 
 <table width="100%">
 <tr>
@@ -62,7 +62,7 @@
 
 <div align="center">
 
-## How I Ship
+## The Loop
 
 <table width="100%">
 <tr>
@@ -80,7 +80,7 @@
 
 <div align="center">
 
-## Selected Work
+## Proof of Work
 
 <table width="100%">
 <tr>
@@ -103,26 +103,6 @@
 <br/>
 </td>
 </tr>
-<tr>
-<td width="50%" valign="top" align="center">
-<br/>
-<sub>COMPUTER VISION</sub><br/><br/>
-<a href="#"><b>Image Recognition Tool</b></a><br/><br/>
-<sub>A deep learning system that recognizes what is in an image.</sub><br/><br/>
-<code>Python</code> <code>Deep learning</code><br/><br/>
-<a href="#"><sub><b>CASE STUDY →</b></sub></a><br/>
-<br/>
-</td>
-<td width="50%" valign="top" align="center">
-<br/>
-<sub>NLP</sub><br/><br/>
-<a href="#"><b>Text Analysis System</b></a><br/><br/>
-<sub>A system for processing and understanding human language.</sub><br/><br/>
-<code>Python</code> <code>NLP</code><br/><br/>
-<a href="#"><sub><b>CASE STUDY →</b></sub></a><br/>
-<br/>
-</td>
-</tr>
 </table>
 
 </div>
@@ -131,7 +111,7 @@
 
 <div align="center">
 
-## Toolbox
+## The Stack
 
 <table width="100%">
 <tr>
